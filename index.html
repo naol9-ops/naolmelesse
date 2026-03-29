@@ -367,7 +367,50 @@ function checkTense(answer){
     }
 }
 </script>
+def get_past_forms(verb):
+    # Irregular verbs dictionary
+    irregular = {
+        "eat": ("ate", "eaten"),
+        "go": ("went", "gone"),
+        "see": ("saw", "seen"),
+        "write": ("wrote", "written"),
+        "take": ("took", "taken")
+    }
 
+    if verb in irregular:
+        return irregular[verb]
+    else:
+        # Regular verbs
+        return (verb + "ed", verb + "ed")
+
+
+def generate_tenses(subject, verb):
+    past, past_participle = get_past_forms(verb)
+
+    print("\n=== PRESENT TENSE ===")
+    print(f"1. Simple Present: {subject} {verb}")
+    print(f"2. Present Continuous: {subject} am/is/are {verb}ing")
+    print(f"3. Present Perfect: {subject} have/has {past_participle}")
+    print(f"4. Present Perfect Continuous: {subject} have/has been {verb}ing")
+
+    print("\n=== PAST TENSE ===")
+    print(f"5. Simple Past: {subject} {past}")
+    print(f"6. Past Continuous: {subject} was/were {verb}ing")
+    print(f"7. Past Perfect: {subject} had {past_participle}")
+    print(f"8. Past Perfect Continuous: {subject} had been {verb}ing")
+
+    print("\n=== FUTURE TENSE ===")
+    print(f"9. Simple Future: {subject} will {verb}")
+    print(f"10. Future Continuous: {subject} will be {verb}ing")
+    print(f"11. Future Perfect: {subject} will have {past_participle}")
+    print(f"12. Future Perfect Continuous: {subject} will have been {verb}ing")
+
+
+# 🔹 User Input (makes it interactive)
+subject = input("Enter subject (I/She/They): ")
+verb = input("Enter verb (base form): ")
+
+generate_tenses(subject, verb)
 </body>
 </html>
 </script>
