@@ -426,7 +426,55 @@ function checkQuiz() {
   <footer>
     &copy; 2026 Blue to Pink Website
   </footer>
+import random
+import math
 
+# Trigonometry questions generator
+def generate_question():
+    types = ["sin", "cos", "tan"]
+    angle_choices = [0, 30, 45, 60, 90]  # degrees
+    question_type = random.choice(types)
+    angle = random.choice(angle_choices)
+
+    # Compute the correct answer
+    radians = math.radians(angle)
+    if question_type == "sin":
+        answer = round(math.sin(radians), 2)
+    elif question_type == "cos":
+        answer = round(math.cos(radians), 2)
+    elif question_type == "tan":
+        if angle == 90:
+            return generate_question()  # skip undefined tan(90)
+        answer = round(math.tan(radians), 2)
+    
+    # Create question text
+    question_text = f"What is {question_type}({angle}°)? (Round to 2 decimal places)"
+    return question_text, answer
+
+# Quiz loop
+score = 0
+num_questions = 5
+
+print("=== Welcome to the Trigonometry Quiz ===")
+print("Answer all questions (round your answers to 2 decimal places).")
+print("Example: 0.5, 1.73, etc.\n")
+
+for i in range(num_questions):
+    question, correct_answer = generate_question()
+    print(f"Question {i+1}: {question}")
+    
+    try:
+        user_answer = float(input("Your answer: "))
+        if abs(user_answer - correct_answer) < 0.01:  # allow small rounding error
+            print("✅ Correct!\n")
+            score += 1
+        else:
+            print(f"❌ Wrong! Correct answer: {correct_answer}\n")
+    except ValueError:
+        print(f"❌ Invalid input. Correct answer was: {correct_answer}\n")
+
+print(f" your final score: {score}/{num_questions}")
+print("Quiz complete! 🎉")
 </body>
 </html>
 <body> 
